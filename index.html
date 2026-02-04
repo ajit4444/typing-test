@@ -1,26 +1,103 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Typing Test</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TypeFast — typing test</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="app" id="app">
+    <header class="topbar">
+      <div class="left">
+        <div class="brand">TypeFast</div>
+        <div class="mode-group">
+          <button id="modeTime" class="seg-btn active">Time</button>
+          <button id="modeWords" class="seg-btn">Words</button>
+        </div>
+        <select id="amountSelect" class="select" aria-label="Select duration or word count">
+          <option value="15">15s</option>
+          <option value="30" selected>30s</option>
+          <option value="60">60s</option>
+          <option value="120">120s</option>
+        </select>
+      </div>
 
-<div class="top">
-  <span>typingtest</span>
-</div>
+      <div class="right">
+        <button id="themeToggle" class="btn">Light</button>
+        <button id="settingsBtn" class="btn">Settings</button>
+        <button id="restartBtn" class="btn primary">Restart</button>
+      </div>
+    </header>
 
-<div id="stats">
-  <span id="wpm">0 wpm</span>
-  <span id="acc">100%</span>
-  <span id="time">60s</span>
-</div>
+    <main class="main">
+      <section class="status" aria-hidden="false">
+        <div class="stat">
+          <div class="stat-value" id="wpm">0</div>
+          <div class="stat-label">WPM</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="accuracy">100%</div>
+          <div class="stat-label">Accuracy</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="time">30</div>
+          <div class="stat-label" id="timeLabel">s</div>
+        </div>
+      </section>
 
-<div id="words"></div>
+      <section class="test-area" id="testArea" tabindex="0" aria-label="Typing test area">
+        <div id="words" class="words" aria-hidden="false"></div>
+        <div class="caret" id="caret" aria-hidden="true"></div>
+        <input id="hiddenInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-hidden="true" />
+      </section>
 
-<input id="hiddenInput" autofocus>
+      <section class="controls-row">
+        <div class="left-controls">
+          <button id="toggleResults" class="link">Show Results</button>
+          <button id="copyResult" class="link">Copy Result</button>
+        </div>
+        <div class="right-controls">
+          <div id="progress" class="progress" aria-hidden="true"><div id="progressFill"></div></div>
+        </div>
+      </section>
 
-<script src="script.js"></script>
+      <section id="resultsPanel" class="results hidden" aria-live="polite"></section>
+      <section id="leaderboardPanel" class="leaderboard hidden" aria-live="polite"></section>
+    </main>
+
+    <footer class="site-footer">
+      <div>Built with ❤️ — open-source starter</div>
+    </footer>
+  </div>
+
+  <div id="settingsModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+    <div class="modal-content">
+      <h3 id="settingsTitle">Settings</h3>
+      <label>Font size
+        <select id="fontSizeSelect" class="select">
+          <option value="14">Small</option>
+          <option value="16" selected>Normal</option>
+          <option value="18">Large</option>
+          <option value="22">Huge</option>
+        </select>
+      </label>
+      <label>Word source
+        <select id="wordSourceSelect" class="select">
+          <option value="common" selected>Common words</option>
+          <option value="quotes">Quotes (short)</option>
+        </select>
+      </label>
+
+      <div class="modal-actions">
+        <button id="clearLeaderboard" class="btn danger">Clear Leaderboard</button>
+        <div class="spacer"></div>
+        <button id="closeSettings" class="btn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
