@@ -1,42 +1,75 @@
-body {
-  background: #111;
-  color: #aaa;
-  font-family: monospace;
-  margin: 0;
-  padding: 20px;
+:root{
+  --bg:#0f1724;
+  --panel:#0b1220;
+  --muted:#9aa4b2;
+  --accent:#7c3aed;
+  --accent-2:#06b6d4;
+  --text:#e6eef6;
+  --radius:10px;
+  --max-w:980px;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+  font-size:16px;
 }
 
-.top {
-  color: #f5c542;
-  font-size: 22px;
-  margin-bottom: 30px;
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--text)}
+.app{max-width:var(--max-w);margin:28px auto;padding:18px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;gap:12px}
+.left{display:flex;align-items:center;gap:12px}
+.brand{font-weight:700;font-size:1.2rem;color:var(--accent)}
+.mode-group{display:flex;border-radius:8px;background:rgba(255,255,255,0.02);overflow:hidden}
+.seg-btn{padding:8px 10px;border:0;background:transparent;color:var(--text);cursor:pointer;font-weight:600}
+.seg-btn.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff}
+.select{padding:7px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text)}
+.right{display:flex;gap:8px;align-items:center}
+.btn{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text);padding:8px 12px;border-radius:8px;cursor:pointer}
+.btn.primary{background:var(--accent);border-color:transparent}
+.btn.danger{background:#7f1d1d;color:#fff;border:none}
+.link{background:none;border:0;color:var(--accent);cursor:pointer;text-decoration:underline}
+
+.main{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:18px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+.status{display:flex;gap:16px;justify-content:center;margin-bottom:16px}
+.stat{text-align:center}
+.stat-value{font-size:1.6rem;font-weight:700}
+.stat-label{font-size:0.8rem;color:var(--muted)}
+
+.test-area{position:relative;min-height:160px;border-radius:10px;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);outline:none;cursor:text}
+.words{font-size:1.25rem;line-height:1.9;color:var(--text);user-select:none;word-break:break-word}
+.words .word{margin-right:12px;display:inline-block}
+.words .char{padding:0 1px;white-space:pre}
+.words .char.correct{color:#9EEB9E}
+.words .char.incorrect{color:#FFB4B4}
+.words .char.current{background:rgba(255,255,255,0.03);border-bottom:2px solid var(--accent);border-radius:2px}
+.caret{position:absolute;width:2px;height:1.4rem;background:var(--accent);top:18px;left:18px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:.15}}
+
+#hiddenInput{position:absolute;left:-9999px;top:-9999px}
+
+.controls-row{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+.progress{width:220px;height:8px;background:rgba(255,255,255,0.04);border-radius:6px;overflow:hidden}
+#progressFill{width:0%;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+
+.results, .leaderboard{margin-top:12px;padding:12px;border-radius:8px;background:rgba(0,0,0,0.2);text-align:center}
+.hidden{display:none}
+
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);z-index:60}
+.modal-content{background:var(--panel);padding:18px;border-radius:10px;width:min(520px,94%);display:flex;flex-direction:column;gap:10px}
+.modal .spacer{flex:1}
+
+.site-footer{padding:18px 0;text-align:center;color:var(--muted)}
+
+/* light theme */
+.light{
+  --bg:#f6f8fb;
+  --panel:#ffffff;
+  --muted:#5b6b78;
+  --accent:#3b82f6;
+  --accent-2:#06b6d4;
+  --text:#0b1220;
 }
 
-#stats {
-  margin-bottom: 20px;
-}
-
-#stats span {
-  margin-right: 15px;
-}
-
-#words {
-  font-size: 26px;
-  line-height: 1.5;
-  max-width: 900px;
-}
-
-.word {
-  margin-right: 8px;
-}
-
-.correct { color: #eee; }
-.wrong { color: #f55; }
-.active {
-  border-bottom: 2px solid #f5c542;
-}
-
-#hiddenInput {
-  opacity: 0;
-  position: absolute;
+@media (max-width:720px){
+  .words{font-size:1rem}
+  .stat-value{font-size:1.2rem}
+  .app{padding:12px;margin:12px auto}
 }
